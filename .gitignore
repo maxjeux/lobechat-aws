@@ -1,0 +1,19 @@
+# Data directories (contain runtime data)
+data/
+
+# Environment files with secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+uv.lock
+
+# AWS credentials
+aws_credentials.yaml
+
+# IDE
+.idea/
+.vscode/
+*.swp
