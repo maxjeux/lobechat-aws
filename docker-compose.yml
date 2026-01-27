@@ -84,16 +84,15 @@ services:
       - SSH_ALLOWED_PATHS=${SSH_ALLOWED_PATHS}
       - SSH_COMMANDS_BLACKLIST=${SSH_COMMANDS_BLACKLIST}
       - SSH_ARGUMENTS_BLACKLIST=${SSH_ARGUMENTS_BLACKLIST}
-      # AWS credentials for MCP servers (aws-kb-retrieval, aws-resources-operations)
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN}
+      # AWS region config (credentials read from mounted ~/.aws)
       - AWS_REGION=${AWS_REGION:-eu-west-1}
       - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-eu-west-1}
     volumes:
       - ./config/mcp_settings.json:/app/mcp_settings.json
       - ./data/mcphub:/app/data
       - ./config/ssh:/app/ssh:ro
+      # AWS credentials - mounted so boto3 reads fresh creds without container restart
+      - ~/.aws:/root/.aws:ro
       # Docker socket for MCP servers that use docker (aws-resources-operations)
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
