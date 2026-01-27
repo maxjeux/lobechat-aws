@@ -18,6 +18,110 @@
         "SSH_COMMANDS_BLACKLIST": "rm,mv,dd,mkfs,fdisk,format,shutdown,reboot",
         "SSH_ARGUMENTS_BLACKLIST": "-rf,-fr,--force"
       }
+    },
+    "notion-mcp": {
+      "enabled": false,
+      "owner": "admin",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@notionhq/notion-mcp-server"
+      ],
+      "env": {
+        "OPENAPI_MCP_HEADERS": "${OPENAPI_MCP_HEADERS}"
+      }
+    },
+    "aws-kb-retrieval": {
+      "enabled": false,
+      "owner": "admin",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-aws-kb-retrieval"
+      ],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_REGION": "${AWS_REGION}"
+      }
+    },
+    "aws-resources-operations": {
+      "enabled": false,
+      "owner": "admin",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}",
+        "-e",
+        "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}",
+        "-e",
+        "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}",
+        "buryhuang/mcp-server-aws-resources:latest"
+      ],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_DEFAULT_REGION": "${AWS_DEFAULT_REGION}"
+      }
+    },
+    "filesystem": {
+      "enabled": true,
+      "owner": "admin",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/"
+      ],
+      "env": {}
+    },
+    "desktop-commander-mcp": {
+      "enabled": false,
+      "owner": "admin",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@wonderwhy-er/desktop-commander"
+      ],
+      "env": {}
+    },
+    "playwright": {
+      "enabled": true,
+      "owner": "admin",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--no-sandbox",
+        "--viewport-size",
+        "1920x1080"
+      ],
+      "env": {}
+    },
+    "pickstar-2002-minio-mcp": {
+      "enabled": true,
+      "owner": "admin",
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@pickstar-2002/minio-mcp@latest",
+        "--endpoint={{config.MINIO_ENDPOINT}}",
+        "--port={{config.MINIO_PORT}}",
+        "--access-key={{config.MINIO_ACCESS_KEY}}",
+        "--secret-key={{config.MINIO_SECRET_KEY}}",
+        "--use-ssl={{config.MINIO_USE_SSL}}",
+        "--region={{config.MINIO_REGION}}"
+      ],
+      "config": {
+        "MINIO_ENDPOINT": "minio",
+        "MINIO_PORT": "9000",
+        "MINIO_ACCESS_KEY": "minioadmin",
+        "MINIO_SECRET_KEY": "minioadmin",
+        "MINIO_USE_SSL": "false",
+        "MINIO_REGION": "us-east-1"
+      }
     }
   },
   "systemConfig": {
