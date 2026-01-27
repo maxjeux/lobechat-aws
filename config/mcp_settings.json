@@ -31,39 +31,23 @@
         "OPENAPI_MCP_HEADERS": "${OPENAPI_MCP_HEADERS}"
       }
     },
-    "aws-kb-retrieval": {
+    "aws-resources-operations": {
       "enabled": true,
       "owner": "admin",
-      "command": "npx",
+      "command": "uvx",
       "args": [
-        "-y",
-        "@modelcontextprotocol/server-aws-kb-retrieval"
+        "--from",
+        "git+https://github.com/baryhuang/mcp-server-aws-resources-python.git",
+        "python",
+        "-m",
+        "mcp_server_aws_resources.server",
+        "--region",
+        "${AWS_REGION}"
       ],
       "env": {
         "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
         "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
-        "AWS_REGION": "${AWS_REGION}"
-      }
-    },
-    "aws-resources-operations": {
-      "enabled": false,
-      "owner": "admin",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}",
-        "-e",
-        "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}",
-        "-e",
-        "AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}",
-        "buryhuang/mcp-server-aws-resources:latest"
-      ],
-      "env": {
-        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
-        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_SESSION_TOKEN": "${AWS_SESSION_TOKEN}",
         "AWS_DEFAULT_REGION": "${AWS_DEFAULT_REGION}"
       }
     },
