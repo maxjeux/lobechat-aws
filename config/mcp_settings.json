@@ -96,7 +96,10 @@
         "@playwright/mcp@latest",
         "--no-sandbox",
         "--viewport-size",
-        "1920x1080"
+        "1920x1080",
+        "--output-dir",
+        "/tmp",
+        "--allow-unrestricted-file-access"
       ],
       "env": {}
     },
