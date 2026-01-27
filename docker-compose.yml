@@ -22,6 +22,9 @@ services:
     container_name: lobe-chat
     ports:
       - "${LOBECHAT_PORT:-47000}:3210"
+    volumes:
+      # HOTFIX: Patch MCP callTool to add session retry logic
+      - ./patches/route.js:/app/.next/server/app/(backend)/trpc/tools/[trpc]/route.js:ro
     environment:
       # App configuration
       - APP_URL=http://${HOST_DOMAIN:-localhost}:${LOBECHAT_PORT:-47000}
@@ -66,6 +69,26 @@ services:
         condition: service_healthy
       vllm:
         condition: service_healthy
+
+  mcphub:
+    image: samanhappy/mcphub:latest
+    container_name: mcphub
+    ports:
+      - "${MCPHUB_PORT:-47008}:3000"
+    environment:
+      - SSH_HOST=${SSH_HOST}
+      - SSH_PORT=${SSH_PORT:-22}
+      - SSH_USERNAME=${SSH_USERNAME}
+      - SSH_PRIVATE_KEY_FILE=/app/ssh/id_rsa
+      - SSH_ALLOWED_COMMANDS=${SSH_ALLOWED_COMMANDS}
+      - SSH_ALLOWED_PATHS=${SSH_ALLOWED_PATHS}
+      - SSH_COMMANDS_BLACKLIST=${SSH_COMMANDS_BLACKLIST}
+      - SSH_ARGUMENTS_BLACKLIST=${SSH_ARGUMENTS_BLACKLIST}
+    volumes:
+      - ./config/mcp_settings.json:/app/mcp_settings.json
+      - ./data/mcphub:/app/data
+      - ./config/ssh:/app/ssh:ro
+    restart: unless-stopped
 
   vllm:
     image: vllm/vllm-openai:latest
