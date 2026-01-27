@@ -1,3 +1,9 @@
+## v0.5.2 (2026-01-27)
+
+### Fix
+
+- **mcp**: mount ~/.aws for dynamic credential refresh
+
 ## v0.5.1 (2026-01-27)
 
 ### Feat
