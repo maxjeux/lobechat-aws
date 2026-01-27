@@ -1,3 +1,9 @@
+## v0.4.3 (2026-01-27)
+
+### Feat
+
+- **agents**: add generic screenshot service agent for lobe-chat-agents
+
 ## v0.4.2 (2026-01-27)
 
 ## v0.4.1 (2026-01-27)
