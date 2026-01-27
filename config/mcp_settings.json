@@ -62,16 +62,6 @@
       ],
       "env": {}
     },
-    "desktop-commander-mcp": {
-      "enabled": true,
-      "owner": "admin",
-      "command": "npx",
-      "args": [
-        "-y",
-        "@wonderwhy-er/desktop-commander"
-      ],
-      "env": {}
-    },
     "playwright": {
       "enabled": true,
       "owner": "admin",
@@ -109,6 +99,15 @@
         "MINIO_USE_SSL": "false",
         "MINIO_REGION": "us-east-1"
       }
+    },
+    "aws-documentation": {
+      "enabled": true,
+      "owner": "admin",
+      "command": "uvx",
+      "args": [
+        "awslabs.aws-documentation-mcp-server@latest"
+      ],
+      "env": {}
     }
   },
   "systemConfig": {
