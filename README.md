@@ -83,3 +83,8 @@ Edit `.env` for:
 - `S3_*` - MinIO storage
 - `POSTGRES_PASSWORD` - Database password
 - `KEY_VAULTS_SECRET` - API key encryption
+
+
+
+## DevOps Homework  2
+This change was made to trigger the CI pipeline.
